@@ -39,7 +39,7 @@ module Functional_Unit(instruction, A, B, C, select, F);
             3'b011 : 
             begin
                 X = B; Y = C;
-                temp = X | Y;
+                F = X | Y;
             end
             3'b010 : F = X & Y;
             3'b001 : F = X + ~Y;
