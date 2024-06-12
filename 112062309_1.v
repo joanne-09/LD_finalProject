@@ -30,11 +30,17 @@ module Functional_Unit(instruction, A, B, C, select, F);
             3'b101 : 
             begin
                 X = A; Y = C;
-                F = find_MIN(X, Y, min);
+                if(X < Y)
+                    F = X;
+                else
+                    F = Y;
             end
             3'b100 : 
             begin
-                F = find_MAX(X, Y, max);
+                if(X > Y)
+                    F = X;
+                else
+                    F = Y;
             end
             3'b011 : 
             begin
@@ -69,33 +75,5 @@ module encoder (instruction,encoder_instruction);
             8'b00000001 : encoder_instruction = 3'b000;
             default : encoder_instruction = 3'b000;
         endcase
-    end
-endmodule
-
-module find_MAX(a, b, max);
-    input wire [7:0] a;
-    input wire [7:0] b;
-    output [7:0] max;
-    reg [7:0] max;
-    always @(a, b) begin
-        if (a > b) begin
-            max = a;
-        end else begin
-            max = b;
-        end
-    end
-endmodule
-
-module find_MIN(a, b, min);
-    input wire [7:0] a;
-    input wire [7:0] b;
-    output [7:0] min;
-    reg [7:0] min;
-    always @(a, b) begin
-        if (a < b) begin
-            min = a;
-        end else begin
-            min = b;
-        end
     end
 endmodule
