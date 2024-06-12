@@ -1,5 +1,5 @@
-SRC1=project_1.v
-SRC2=project_2.v
+SRC1=112062309_1.v
+SRC2=112062309_2.v
 tb1=tb1.v
 tb2=tb2.v
 PROBLEM1_SRCs=${SRC1} ${tb1}
