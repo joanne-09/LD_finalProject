@@ -72,6 +72,18 @@ module tb;
                 $display("Your answer = 8'b%b (8'h%h), but the golden = 8'b%b (8'h%h)", F, F, golden[j], golden[j]);
                 $display("-------------------------------------------------------\n");
             end
+            /*else begin
+                $display("\n-------------------------------------------------------");
+                $display("[CORRECT]");
+                $display("testcase %3d",j + 1);
+                $display("A = 8'b%b (8'h%h) ", A, A);
+                $display("B = 8'b%b (8'h%h) ", B, B);
+                $display("C = 8'b%b (8'h%h) ", C, C);
+                $display("select = 3'b%b ", selection[j]);
+                $display("instruction = 8'b%b (8'h%h)", instruct[j] ,instruct[j]);
+                $display("Your answer = 8'b%b (8'h%h), but the golden = 8'b%b (8'h%h)", F, F, golden[j], golden[j]);
+                $display("-------------------------------------------------------\n");
+            end*/
         end
         if(error==0) begin
             $display("\n[success] You can start doing problem 2.\n");

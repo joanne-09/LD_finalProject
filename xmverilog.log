@@ -1,0 +1,50 @@
+xmverilog(64): 22.03-s003: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
+TOOL:	xmverilog	22.03-s003: Started on Jun 12, 2024 at 23:41:27 CST
+xmverilog
+	112062309_1.v
+	tb1.v
+	+access+r
+Recompiling... reason: file './112062309_1.v' is newer than expected.
+	expected: Wed Jun 12 23:14:25 2024
+	actual:   Wed Jun 12 23:41:17 2024
+file: 112062309_1.v
+	module worklib.Functional_Unit:v
+		errors: 0, warnings: 0
+	module worklib.encoder:v
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+    encoder e1(instruction,encoder_instruction);
+                                             |
+xmelab: *W,CUVMPW (./112062309_1.v,13|45): port sizes differ in port connection(3/4) for the instance(tb.fu) .
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.encoder:v <0x010b6184>
+			streams:   1, words:  1054
+		worklib.Functional_Unit:v <0x7487c253>
+			streams:   1, words:  3380
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                 Instances  Unique
+		Modules:                 3       3
+		Registers:              16      16
+		Expanded wires:          4       1
+		Vectored wires:          6       -
+		Always blocks:           2       2
+		Initial blocks:          4       4
+		Pseudo assignments:      3       3
+		Simulation timescale:  1ps
+	Writing initial simulation snapshot: worklib.tb:v
+Loading snapshot worklib.tb:v .................... Done
+*Verdi* WARNING: Use VERDI_HOME to replace NOVAS_HOME because NOVAS_HOME will not be supported in future releases.
+*Verdi* Loading libsscore_xcelium.so
+xcelium> source /usr/cad/cadence/XCELIUM/XCELIUM_22.03.003/tools/xcelium/files/xmsimrc
+xcelium> run
+
+[success] You can start doing problem 2.
+
+Simulation complete via $finish(1) at time 2565 NS + 0
+./tb1.v:93         $finish;
+xcelium> exit
+TOOL:	xmverilog	22.03-s003: Exiting on Jun 12, 2024 at 23:41:27 CST  (total: 00:00:00)

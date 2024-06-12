@@ -18,31 +18,46 @@ module Functional_Unit(instruction, A, B, C, select, F);
     //You must only use "encoder_instructions", not "instruction".
     reg [7:0] F;
 
-    always @(encoder_instruction or select) begin
-        if(select == 3'b011)
+    always @(*) begin
+        //$display("encoder: 3'b%b", encoder_instruction);
+
+        case(select)
+            3'b011:
             begin
                 X = B;
                 Y = C;
             end
-        else if(select == 3'b101)
+            3'b101:
             begin
                 X = A;
                 Y = C;
             end
-        else if(select == 3'b110)
+            3'b110:
             begin
-                X = A;
-                Y = B;
+                X = A; Y = B;
             end
-        else
+            default:
             begin
                 X = C;
                 Y = A;
             end
+        endcase
 
         case (encoder_instruction)
-            3'b111 : F = X<<1 + Y;
-            3'b110 : F = X>>1 + Y;
+            3'b111 : 
+            begin
+                if(X[7] == 1) 
+                    F = (X<<1) + Y + 8'b00000001;
+                else 
+                    F = (X<<1) + Y;
+            end
+            3'b110 : 
+            begin
+                if(X[0] == 1)
+                    F = 8'b10000000 + (X>>1) + Y;
+                else
+                    F = (X>>1) + Y;
+            end
             3'b101 : 
             begin
                 if(X < Y)
@@ -59,7 +74,7 @@ module Functional_Unit(instruction, A, B, C, select, F);
             end
             3'b011 : F = X | Y;
             3'b010 : F = X & Y;
-            3'b001 : F = X + ~Y;
+            3'b001 : F = X + (~Y);
             3'b000 : F = X + Y;
             default : F = X + Y;
         endcase
@@ -75,16 +90,16 @@ module encoder (instruction,encoder_instruction);
     //You can define encoder_instruction as 'reg' or 'wire'
     reg [3:0] encoder_instruction;
     always @(instruction) begin
-        casex (instruction)
-            8'b1xxxxxxx : encoder_instruction = 3'b111;
-            8'b01xxxxxx : encoder_instruction = 3'b110;
-            8'b001xxxxx : encoder_instruction = 3'b101;
-            8'b0001xxxx : encoder_instruction = 3'b100;
-            8'b00001xxx : encoder_instruction = 3'b011;
-            8'b000001xx : encoder_instruction = 3'b010;
-            8'b0000001x : encoder_instruction = 3'b001;
-            8'b00000001 : encoder_instruction = 3'b000;
-            default : encoder_instruction = 3'b000;
+        casez (instruction)
+            8'b1??????? : encoder_instruction = 4'b0111;
+            8'b01?????? : encoder_instruction = 4'b0110;
+            8'b001????? : encoder_instruction = 4'b0101;
+            8'b0001???? : encoder_instruction = 4'b0100;
+            8'b00001??? : encoder_instruction = 4'b0011;
+            8'b000001?? : encoder_instruction = 4'b0010;
+            8'b0000001? : encoder_instruction = 4'b0001;
+            8'b00000001 : encoder_instruction = 4'b0000;
+            default : encoder_instruction = 4'b0000;
         endcase
     end
 endmodule
