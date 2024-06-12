@@ -18,7 +18,7 @@ module Functional_Unit(instruction, A, B, C, select, F);
     //You must only use "encoder_instructions", not "instruction".
     reg [7:0] F;
 
-    always @(encoder_instruction) begin
+    always @(encoder_instruction or select) begin
         if(select == 3'b011)
             begin
                 X = B;
@@ -39,7 +39,7 @@ module Functional_Unit(instruction, A, B, C, select, F);
                 X = C;
                 Y = A;
             end
-            
+
         case (encoder_instruction)
             3'b111 : F = X<<1 + Y;
             3'b110 : F = X>>1 + Y;
