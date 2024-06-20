@@ -18,7 +18,7 @@ module Functional_Unit(instruction, A, B, C, select, F);
     //You must only use "encoder_instructions", not "instruction".
     reg [7:0] F;
 
-    always @(*) begin
+    always @(select or encoder_instruction or A or B or C) begin
         //$display("encoder: 3'b%b", encoder_instruction);
 
         case(select)
